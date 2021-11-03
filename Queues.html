@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<!-- Developed by-->
+<!-- Umar Mahmud-->
+<!-- umarDORmahmudATfuiDOTeduDOTpk-->
+<!-- III-XI-MMXXI-->
+<!-- Queues ver 2.1-->
+<!--GNU General Public License (GPL) GPLv3-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Queues</title>
+    </head>
+    <body style="font-family:sans-serif;margin-left:auto;margin-right:auto;font-size:16px;width:1000px;">
+		<h1 style="font-size:32px;text-align:left;">Queue</h1>
+		<p>A queue is a First-In First-Out (FIFO) style of data structure. The element that arrives first in time leaves first as well.</p>
+		<p>The size of Queue is fixed for 5 elements. You can enter data as text.</p>
+		<form>	
+			<label><b>Input Queue Data:</b></label><br>
+			<input type="text" id="fVal"><br>
+			
+			
+			<button type="button" id="pushBn" onclick="enQ()">
+				EnQueue Operation
+			</button>
+			<button type="button" id="popBn" onclick="deQ()">
+				DeQueue Operation
+			</button>
+			
+			<button type="button" onclick="clearAll()">
+				Clear!
+			</button>
+		</form> 
+		
+		<div style="width:500px; text-align:center; margin-left:auto; margin-right:auto; position:relative">			
+			<canvas id="theCanvas" width="600" height="300">
+				Canvas not supported; please update your browser.
+			</canvas>
+		</div>
+		
+		<script>
+			var theCanvas = document.getElementById("theCanvas");
+			var theContext = theCanvas.getContext("2d");
+			var xrow1 = 5;
+			var yrow1 = 20;
+			var loc0;	//head
+			var loc1; 
+			var loc2;
+			var loc3;
+			var loc4;	//tail
+			var head = 0;
+			var size = 0;
+			init();
+			
+			function init(){
+				theContext.beginPath();								
+				theContext.fillStyle = "red";
+				theContext.font = "bold 26px Tahoma";
+				theContext.fillText("Queue Area", xrow1+175, yrow1+50);
+				theContext.strokeStyle = "blue";
+				theContext.lineWidth = 3;
+				theContext.rect(xrow1, yrow1+80, 100, 30);
+				theContext.rect(xrow1+100, yrow1+80, 100, 30);
+				theContext.rect(xrow1+200, yrow1+80, 100, 30);
+				theContext.rect(xrow1+300, yrow1+80, 100, 30);
+				theContext.rect(xrow1+400, yrow1+80, 100, 30);
+				theContext.stroke();
+			}
+
+			function enQ(){
+				theContext.beginPath();
+				theContext.fillStyle = "green";
+				theContext.font = "bold 16px Tahoma";
+				if(head == 0){		//empty Queue
+					inVal = document.getElementById("fVal").value;
+					loc0 = inVal;
+					theContext.beginPath();
+					theContext.fillText(loc0, xrow1+405, yrow1+100);
+					head++;
+					size++;
+				}			
+				else if(head == 1){
+					inVal = document.getElementById("fVal").value;
+					loc1 = inVal;
+					theContext.beginPath();
+					theContext.fillText(loc1, xrow1+305, yrow1+100);
+					head++;
+					size++;
+				}
+				else if(head == 2){
+					inVal = document.getElementById("fVal").value;
+					loc2 = inVal;
+					theContext.beginPath();
+					theContext.fillText(loc2, xrow1+205, yrow1+100);
+					head++;
+					size++;
+				}
+				else if(head == 3){
+					inVal = document.getElementById("fVal").value;
+					loc3 = inVal;
+					theContext.beginPath();
+					theContext.fillText(loc3, xrow1+105, yrow1+100);
+					head++;
+					size++;
+				}
+				else if(head == 4){
+					inVal = document.getElementById("fVal").value;
+					loc4 = inVal;
+					theContext.beginPath();
+					theContext.fillText(loc4, xrow1+5, yrow1+100);
+					head++;
+					size++;
+				}	
+				else{ //Queue Full
+					alert("Queue is full, cannot enqueue");
+				}			
+			}
+			function deQ(){
+				if(head == 0){ //Full Q
+					alert("Queue is empty, cannot dequeue");
+				}
+				else if(head == 1){	//1 item
+					theContext.clearRect(xrow1+405, yrow1+85, 90, 20);
+					alert("Value DeQueued is: "+loc0);
+					loc0 = 0;
+					head--;
+					size--;
+				}
+				else if(head == 2){	//2 item
+					theContext.clearRect(xrow1+305, yrow1+85, 90, 20);
+					theContext.clearRect(xrow1+405, yrow1+85, 90, 20);
+					alert("Value DeQueued is: "+loc0);
+					loc0 = loc1;
+					theContext.fillText(loc0, xrow1+405, yrow1+100);
+					head--;
+					size--;
+				}
+				else if(head == 3){	//3 items
+					theContext.clearRect(xrow1+205, yrow1+85, 90, 20);
+					theContext.clearRect(xrow1+305, yrow1+85, 90, 20);
+					theContext.clearRect(xrow1+405, yrow1+85, 90, 20);
+					alert("Value DeQueued is: "+loc0);
+					loc0 = loc1;
+					loc1 = loc2;
+					theContext.fillText(loc0, xrow1+405, yrow1+100);
+					theContext.fillText(loc1, xrow1+305, yrow1+100);
+					head--;
+					size--;
+				}
+				else if (head == 4){	//4 item 
+					theContext.clearRect(xrow1+105, yrow1+85, 90, 20);
+					theContext.clearRect(xrow1+205, yrow1+85, 90, 20);
+					theContext.clearRect(xrow1+305, yrow1+85, 90, 20);
+					theContext.clearRect(xrow1+405, yrow1+85, 90, 20);
+					alert("Value DeQueued is: "+loc0);
+					loc0 = loc1;
+					loc1 = loc2;
+					loc2 = loc3;
+					theContext.fillText(loc0, xrow1+405, yrow1+100);
+					theContext.fillText(loc1, xrow1+305, yrow1+100);
+					theContext.fillText(loc2, xrow1+205, yrow1+100);
+					head--;
+					size--;
+				}
+				else {	//5 item Stack full
+					theContext.clearRect(xrow1+5, yrow1+85, 90, 20);
+					theContext.clearRect(xrow1+105, yrow1+85, 90, 20);
+					theContext.clearRect(xrow1+205, yrow1+85, 90, 20);
+					theContext.clearRect(xrow1+305, yrow1+85, 90, 20);
+					theContext.clearRect(xrow1+405, yrow1+85, 90, 20);
+					alert("Value DeQueued is: "+loc0);
+					loc0 = loc1;
+					loc1 = loc2;
+					loc2 = loc3;
+					loc3 = loc4;
+					theContext.fillText(loc0, xrow1+405, yrow1+100);
+					theContext.fillText(loc1, xrow1+305, yrow1+100);
+					theContext.fillText(loc2, xrow1+205, yrow1+100);
+					theContext.fillText(loc3, xrow1+105, yrow1+100);
+					head--;
+					size--;
+				}
+			}
+			
+			function clearAll(){
+				theContext.clearRect(0,0, 600, 300);
+				init();
+			}
+			
+		</script>
+		<br>
+		<hr>
+		<p  style="font-size:18px;text-align:left;">Developed by Scrupulous Professor <a href="mailto:umar.mahmud@fui.edu.pk">Contact</a></p>
+		<p  style="font-size:12px;text-align:left;">Distributed under GNU General Public License (GPL) GPLv3</p>
+	</body>
+</html>
